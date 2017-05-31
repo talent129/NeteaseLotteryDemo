@@ -12,6 +12,8 @@
 #define SCREEN_Width    ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_Height   ([UIScreen mainScreen].bounds.size.height)
 
+#define CellCount 4
+
 @interface CCGuideController ()
 
 @end
@@ -61,21 +63,23 @@ static NSString * const reuseIdentifier = @"guide_cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return CellCount;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //
-    NSString *imgBg = [NSString stringWithFormat:@"guide%ldBackground", indexPath.row + 1];
-    UIImage *image = [UIImage imageNamed:imgBg];
-    
     //创建cell
     CCGuideCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-//    cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
+    cell.backgroundColor = [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1];
     
-    cell.image = image;
+    //or 背景图片
+//    NSString *imgBg = [NSString stringWithFormat:@"guide%ldBackground", indexPath.row + 1];
+//    UIImage *image = [UIImage imageNamed:imgBg];
+//    cell.image = image;
+    
+    //设置 立即体验按钮是否显示
+    [cell setCellCount:CellCount currentCellCount:indexPath.row];
     
     return cell;
 }

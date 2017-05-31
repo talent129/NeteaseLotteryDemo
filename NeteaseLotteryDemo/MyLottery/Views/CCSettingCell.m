@@ -35,7 +35,9 @@
 
 + (instancetype)settingCellWithTableView:(UITableView *)tableView item:(NSDictionary *)item
 {
-    static NSString *iden = @"setting_cell";
+//    static NSString *iden = @"setting_cell";
+    
+    NSString *iden = item[@"cell_type"];
     CCSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
     if (cell == nil) {
         cell = [[CCSettingCell alloc] initWithStyle:[self cellStyleWithText:item[@"cell_type"]] reuseIdentifier:iden];

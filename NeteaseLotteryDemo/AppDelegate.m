@@ -23,13 +23,13 @@
     //创建UIWindow
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-//    [self chooseStartController];
+    [self chooseStartController];
     
     //创建UITabBarController
-    CCMainTabBarController *tab = [[CCMainTabBarController alloc] init];
-    
-    //设置UIWindow的根控制器
-    self.window.rootViewController = tab;
+//    CCMainTabBarController *tab = [[CCMainTabBarController alloc] init];
+//    
+//    //设置UIWindow的根控制器
+//    self.window.rootViewController = tab;
     
     //统一设置导航栏外观
     [self setNavigationBarStyle];
@@ -53,30 +53,24 @@
     NSUserDefaults *userD = [NSUserDefaults standardUserDefaults];
     NSString *app_ver = [userD objectForKey:@"app_version"];
     
-//    //比较偏好设置中的版本号和当前app的版本号
-//    if ([current_version isEqualToString:app_ver]) {
-//        //表示不是第一次启动 也不是更新后的第一次启动
-//        NSLog(@"不是第一次启动");
-//        
-//        //创建UITabBarController
-//        CCMainTabBarController *tab = [[CCMainTabBarController alloc] init];
-//        
-//        //设置UIWindow的根控制器
-//        self.window.rootViewController = tab;
-//        
-//    }else {
-//        //表示是第一次启动 或 更新后第一次启动
-//        NSLog(@"第一次启动");
-//        
-//        //创建UITabBarController
-//        CCMainTabBarController *tab = [[CCMainTabBarController alloc] init];
-//        
-//        //设置UIWindow的根控制器
-//        self.window.rootViewController = tab;
-//    }
-    
-    CCGuideController *guide = [[CCGuideController alloc] init];
-    self.window.rootViewController = guide;
+    //比较偏好设置中的版本号和当前app的版本号
+    if ([current_version isEqualToString:app_ver]) {
+        //表示不是第一次启动 也不是更新后的第一次启动
+        NSLog(@"不是第一次启动");
+        
+        //创建UITabBarController
+        CCMainTabBarController *tab = [[CCMainTabBarController alloc] init];
+        
+        //设置UIWindow的根控制器
+        self.window.rootViewController = tab;
+        
+    }else {
+        //表示是第一次启动 或 更新后第一次启动
+        NSLog(@"第一次启动");
+        
+        CCGuideController *guideVC = [[CCGuideController alloc] init];
+        self.window.rootViewController = guideVC;
+    }
     
     //无论是否第一次启动
     [userD setObject:current_version forKey:@"app_version"];
